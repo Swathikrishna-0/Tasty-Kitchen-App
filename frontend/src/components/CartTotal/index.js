@@ -2,6 +2,7 @@ import {FaRupeeSign} from 'react-icons/fa'
 import React from 'react'
 import CartContext from '../../context/CartContext'
 import './index.css'
+
 // Add Razorpay script
 const loadRazorpayScript = () => {
   return new Promise((resolve) => {
@@ -16,22 +17,28 @@ const loadRazorpayScript = () => {
     document.body.appendChild(script)
   })
 }
+
 const CartTotal = props => {
   const {orderPlaced} = props
+
   return (
     <CartContext.Consumer>
       {value => {
         const {cartList} = value
+
         let totalOrderCost = 0
         cartList.forEach(eachCartItem => {
           totalOrderCost += eachCartItem.cost * eachCartItem.quantity
         })
+
         const onClickPlaceOrder = async () => {
           const res = await loadRazorpayScript()
+
           if (!res) {
             alert('Razorpay SDK failed to load. Are you online?')
             return
           }
+
           // Create order on the backend
           const data = await fetch('http://localhost:5000/create-order', {
             method: 'POST',
@@ -40,6 +47,7 @@ const CartTotal = props => {
             },
             body: JSON.stringify({ amount: totalOrderCost }),
           }).then((t) => t.json())
+
           const options = {
             key: process.env.RAZORPAY_KEY_ID, // Enter the Key ID generated from the Dashboard
             amount: data.amount.toString(),
@@ -65,9 +73,11 @@ const CartTotal = props => {
               color: '#F37254',
             },
           }
+
           const paymentObject = new window.Razorpay(options)
           paymentObject.open()
         }
+
         return (
           <>
             <hr className="cart-hr-line" />
@@ -92,4 +102,5 @@ const CartTotal = props => {
     </CartContext.Consumer>
   )
 }
+
 export default CartTotal
