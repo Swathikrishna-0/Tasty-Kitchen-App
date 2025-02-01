@@ -1,6 +1,6 @@
 ## LIVE DEMO :- <a href="https://tasty-kitchen-app-swathi.netlify.app/">Tasty Kitchen App</a>
-Username:rahul
-Password:rahul@2021
+Username: rahul, 
+Password: rahul@2021
 ### Prerequisites
 
 #### UI Prerequisites
