@@ -111,6 +111,7 @@ class Login extends Component {
             <h1 className="login-heading">Login</h1>
             <div className="input-container">{this.renderUsernameField()}</div>
             <div className="input-container">{this.renderPasswordField()}</div>
+            <p>Username: rahul, Password: rahul@2021</p>
             <button type="submit" className="login-button">
               Login
             </button>
